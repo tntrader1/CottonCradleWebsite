@@ -20,7 +20,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:#FCFAF5}
+  body{background:#FCFAF5;overflow-x:hidden}
   ::selection{background:#cdd6da;color:#3A352E}
   .cc-fade{animation:ccFade .5s ease both}
   @keyframes ccFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
@@ -32,36 +32,96 @@
   .stripe{background:repeating-linear-gradient(90deg,#FCFAF5 0 26px,#cdd6da 26px 52px)}
   ::-webkit-scrollbar{width:10px;height:10px}
   ::-webkit-scrollbar-thumb{background:#d8d0c4;border-radius:8px}
-</style>
+  .cc-burger{display:none}
+  /* ---------- tablet & below ---------- */
+  @media (max-width:880px){
+    .cc-nav-left,.cc-nav-right-links{display:none !important}
+    .cc-burger{display:inline-flex !important}
+    .cc-header-inner{grid-template-columns:auto 1fr auto !important;padding:14px 18px !important;gap:12px !important}
+    .cc-hero{grid-template-columns:1fr !important;padding:16px !important;min-height:0 !important}
+    .cc-hero-copy{padding:44px 30px !important}
+    .cc-hero-img{min-height:360px !important;height:360px !important}
+    .cc-h1{font-size:46px !important}
+    .cc-split{grid-template-columns:1fr !important}
+    .cc-split-tall{min-height:300px !important}
+    .cc-grid-4{grid-template-columns:repeat(2,1fr) !important}
+    .cc-grid-3{grid-template-columns:repeat(2,1fr) !important}
+    .cc-grid-6{grid-template-columns:repeat(3,1fr) !important}
+    .cc-shop{grid-template-columns:1fr !important;gap:24px !important}
+    .cc-filters{position:static !important;flex-direction:row !important;flex-wrap:wrap !important;gap:22px 28px !important}
+    .cc-filters>div{min-width:120px}
+    .cc-pdp{grid-template-columns:1fr !important;gap:30px !important}
+    .cc-pdp-info{position:static !important}
+    .cc-footer{grid-template-columns:1fr 1fr !important;gap:30px !important}
+    .cc-section{padding-left:20px !important;padding-right:20px !important}
+    .cc-pad-x{padding-left:24px !important;padding-right:24px !important}
+    .cc-big{font-size:40px !important}
+    .cc-store-strip{padding:48px 28px !important}
+    .cc-events-row{grid-template-columns:64px 1fr !important}
+    .cc-events-cta{grid-column:2 !important;justify-self:start !important;margin-top:4px}
+  }
+  /* ---------- phones ---------- */
+  @media (max-width:520px){
+    .cc-grid-4{grid-template-columns:1fr 1fr !important;gap:12px !important}
+    .cc-grid-3{grid-template-columns:1fr !important}
+    .cc-grid-6{grid-template-columns:repeat(3,1fr) !important}
+    .cc-footer{grid-template-columns:1fr !important}
+    .cc-h1{font-size:40px !important}
+    .cc-big{font-size:34px !important}
+    .cc-hero-copy{padding:36px 24px !important}
+    .cc-btn-row{flex-direction:column !important;align-items:stretch !important}
+    .cc-btn-row>span{text-align:center}
+    .cc-ann{font-size:11px !important;letter-spacing:.1em !important}
+  }</style>
 </helmet>
 
 <div style="font-family:'Jost',sans-serif;color:#3A352E;background:#FCFAF5;min-height:100vh;letter-spacing:.01em">
 
   <!-- announcement -->
   <div class="stripe" style="height:6px;width:100%"></div>
-  <div style="background:#3A352E;color:#F2EDE3;text-align:center;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;padding:9px 16px;font-weight:300">
+  <div class="cc-ann" style="background:#3A352E;color:#F2EDE3;text-align:center;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;padding:9px 16px;font-weight:300">
     Now open at 126 in Historic Downtown Murfreesboro · Free local pickup · Complimentary gift wrap
   </div>
 
   <!-- header -->
   <header style="position:sticky;top:0;z-index:40;background:rgba(252,250,245,.92);backdrop-filter:blur(10px);border-bottom:1px solid #ece5d8">
-    <div style="max-width:1280px;margin:0 auto;padding:18px 28px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px">
-      <nav style="display:flex;gap:26px;align-items:center;font-size:13px;letter-spacing:.12em;text-transform:uppercase;font-weight:400">
+    <div class="cc-header-inner" style="max-width:1280px;margin:0 auto;padding:18px 28px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px">
+      <nav class="cc-nav-left" style="display:flex;gap:26px;align-items:center;font-size:13px;letter-spacing:.12em;text-transform:uppercase;font-weight:400">
         <span class="cc-link" style="cursor:pointer" onClick="{{ goShop }}">Shop</span>
         <span class="cc-link" style="cursor:pointer" onClick="{{ goRegistry }}">Registry</span>
         <span class="cc-link" style="cursor:pointer" onClick="{{ goEvents }}">Events</span>
       </nav>
+      <span class="cc-burger" onClick="{{ openNav }}" style="cursor:pointer;align-items:center;justify-content:flex-start;font-size:22px;color:#3A352E;width:30px;height:30px;align-self:center">☰</span>
       <div onClick="{{ goHome }}" style="cursor:pointer;text-align:center;line-height:1">
         <div style="font-family:'Cormorant',serif;font-size:30px;font-weight:500;letter-spacing:.02em">cotton <span style="color:#7E97A3">+</span> cradle</div>
         <div style="font-size:9.5px;letter-spacing:.42em;text-transform:uppercase;color:#9a9082;margin-top:3px">baby &nbsp;·&nbsp; children &nbsp;·&nbsp; gifts</div>
       </div>
       <div style="display:flex;gap:22px;align-items:center;justify-content:flex-end;font-size:13px;letter-spacing:.12em;text-transform:uppercase">
-        <span class="cc-link" style="cursor:pointer" onClick="{{ goAbout }}">Our Story</span>
-        <span class="cc-link" style="cursor:pointer" onClick="{{ goVisit }}">Visit</span>
+        <span class="cc-nav-right-links cc-link" style="cursor:pointer" onClick="{{ goAbout }}">Our Story</span>
+        <span class="cc-nav-right-links cc-link" style="cursor:pointer" onClick="{{ goVisit }}">Visit</span>
         <span onClick="{{ toggleCart }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:7px;font-weight:500">Bag<span style="background:#7E97A3;color:#fff;border-radius:999px;min-width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;letter-spacing:0;padding:0 6px">{{ cartCount }}</span></span>
       </div>
     </div>
   </header>
+
+  <!-- mobile nav overlay -->
+  <sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeNav }}" style="position:fixed;inset:0;background:rgba(40,36,30,.4);z-index:70"></div>
+    <aside class="cc-fade" style="position:fixed;top:0;left:0;height:100%;width:300px;max-width:84vw;background:#FCFAF5;z-index:71;display:flex;flex-direction:column;padding:26px 28px;box-shadow:12px 0 40px rgba(0,0,0,.12)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:30px">
+        <div style="font-family:'Cormorant',serif;font-size:24px;font-weight:500">cotton <span style="color:#7E97A3">+</span> cradle</div>
+        <span onClick="{{ closeNav }}" style="cursor:pointer;font-size:24px;color:#9a9082">×</span>
+      </div>
+      <nav style="display:flex;flex-direction:column;gap:4px;font-size:18px;font-family:'Cormorant',serif">
+        <span onClick="{{ navShop }}" style="cursor:pointer;padding:13px 0;border-bottom:1px solid #ece5d8">Shop</span>
+        <span onClick="{{ navRegistry }}" style="cursor:pointer;padding:13px 0;border-bottom:1px solid #ece5d8">Registry</span>
+        <span onClick="{{ navEvents }}" style="cursor:pointer;padding:13px 0;border-bottom:1px solid #ece5d8">Events</span>
+        <span onClick="{{ navAbout }}" style="cursor:pointer;padding:13px 0;border-bottom:1px solid #ece5d8">Our Story</span>
+        <span onClick="{{ navVisit }}" style="cursor:pointer;padding:13px 0;border-bottom:1px solid #ece5d8">Visit</span>
+      </nav>
+      <span onClick="{{ navCart }}" style="cursor:pointer;margin-top:24px;background:#3A352E;color:#FCFAF5;padding:14px;text-align:center;font-size:12px;letter-spacing:.16em;text-transform:uppercase">View bag · {{ cartCount }}</span>
+    </aside>
+  </sc-if>
 
   <main>
     <!-- HOME -->
@@ -69,28 +129,28 @@
       <div class="cc-fade">
 
         <!-- HERO: editorial split -->
-        <section class="cc-fade" style="max-width:1280px;margin:0 auto;padding:28px;display:grid;grid-template-columns:1fr 1.15fr;gap:0;align-items:stretch;min-height:540px">
-            <div style="background:#F2EDE3;padding:64px 56px;display:flex;flex-direction:column;justify-content:center;gap:24px">
+        <section class="cc-fade cc-hero" style="max-width:1280px;margin:0 auto;padding:28px;display:grid;grid-template-columns:1fr 1.15fr;gap:0;align-items:stretch;min-height:540px">
+            <div class="cc-hero-copy" style="background:#F2EDE3;padding:64px 56px;display:flex;flex-direction:column;justify-content:center;gap:24px">
               <div style="font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:#7E97A3">Heirloom-quality · Ethically made</div>
-              <h1 style="font-family:'Cormorant',serif;font-size:64px;line-height:1.02;font-weight:500;letter-spacing:-.01em">Softly made<br>for the<br><span style="font-style:italic;color:#7E97A3">littlest</span> ones.</h1>
+              <h1 class="cc-h1" style="font-family:'Cormorant',serif;font-size:64px;line-height:1.02;font-weight:500;letter-spacing:-.01em">Softly made<br>for the<br><span style="font-style:italic;color:#7E97A3">littlest</span> ones.</h1>
               <p style="font-size:16px;line-height:1.7;color:#6B6258;max-width:380px;font-weight:300">Thoughtfully curated layette, smocked classics, and keepsake gifts — from newborn to little. Gathered in our downtown shop and now yours to browse from home.</p>
-              <div style="display:flex;gap:14px;margin-top:8px">
+              <div class="cc-btn-row" style="display:flex;gap:14px;margin-top:8px">
                 <span onClick="{{ goShop }}" style="cursor:pointer;background:#3A352E;color:#FCFAF5;padding:15px 30px;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase">Shop new arrivals</span>
                 <span onClick="{{ goRegistry }}" style="cursor:pointer;border:1px solid #3A352E;padding:15px 30px;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase">Start a registry</span>
               </div>
             </div>
-            <div style="position:relative;overflow:hidden;background:#FCFAF5;display:flex;align-items:center;justify-content:center;padding:10px">
+            <div class="cc-hero-img" style="position:relative;overflow:hidden;background:#FCFAF5;display:flex;align-items:center;justify-content:center;padding:10px">
               <img src="assets/storefront-soft.png" alt="Cotton + Cradle storefront at 126 N. Maple Street" style="width:100%;height:100%;object-fit:contain;display:block">
             </div>
           </section>
 
         <!-- category tiles -->
-        <section style="max-width:1280px;margin:0 auto;padding:72px 28px 12px">
+        <section class="cc-section" style="max-width:1280px;margin:0 auto;padding:72px 28px 12px">
           <div style="text-align:center;margin-bottom:34px">
             <div style="font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:#7E97A3;margin-bottom:10px">Browse by little one</div>
-            <h2 style="font-family:'Cormorant',serif;font-size:42px;font-weight:500">Shop the collection</h2>
+            <h2 class="cc-big" style="font-family:'Cormorant',serif;font-size:42px;font-weight:500">Shop the collection</h2>
           </div>
-          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+          <div class="cc-grid-4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
             <div onClick="{{ goShop }}" class="cc-prod" style="cursor:pointer;position:relative;overflow:hidden;aspect-ratio:3/4;background:#e9e2d6">
               <img src="assets/cat-girl.png" style="width:100%;height:100%;object-fit:cover;display:block">
               <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(40,36,30,.6))"></div>
@@ -115,7 +175,7 @@
         </section>
 
         <!-- new arrivals -->
-        <section style="max-width:1280px;margin:0 auto;padding:64px 28px 12px">
+        <section class="cc-section" style="max-width:1280px;margin:0 auto;padding:64px 28px 12px">
           <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:28px">
             <div>
               <div style="font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:#7E97A3;margin-bottom:8px">Just unpacked</div>
@@ -123,7 +183,7 @@
             </div>
             <span onClick="{{ goShop }}" class="cc-link" style="cursor:pointer;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase">View all →</span>
           </div>
-          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px">
+          <div class="cc-grid-4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px">
             <sc-for list="{{ newArrivals }}" as="p" hint-placeholder-count="0">
               <div onClick="{{ p.open }}" class="cc-prod" style="cursor:pointer;display:flex;flex-direction:column;gap:10px">
                 <div style="position:relative;overflow:hidden;aspect-ratio:5/6;background:#e9e2d6">
@@ -143,8 +203,8 @@
         </section>
 
         <!-- real-time inventory band -->
-        <section style="background:#F2EDE3;margin-top:72px;padding:60px 28px">
-          <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:.85fr 1.15fr;gap:48px;align-items:center">
+        <section class="cc-section" style="background:#F2EDE3;margin-top:72px;padding:60px 28px">
+          <div class="cc-split" style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:.85fr 1.15fr;gap:48px;align-items:center">
             <div style="display:flex;flex-direction:column;gap:18px">
               <div style="display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#7E97A3"><span style="width:8px;height:8px;border-radius:50%;background:#7a9a6f;display:inline-block;box-shadow:0 0 0 3px rgba(122,154,111,.2)"></span>Live inventory</div>
               <h2 style="font-family:'Cormorant',serif;font-size:40px;font-weight:500;line-height:1.05">What's on the racks,<br>right now</h2>
@@ -155,7 +215,7 @@
                 <span style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:6px 11px;background:#e3edf1;color:#5d7a86">Just arrived</span>
               </div>
             </div>
-            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+            <div class="cc-grid-4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
               <sc-for list="{{ lowStock }}" as="p" hint-placeholder-count="0">
                 <div onClick="{{ p.open }}" class="cc-prod" style="cursor:pointer;background:#FCFAF5;display:flex;flex-direction:column">
                   <div style="position:relative;overflow:hidden;aspect-ratio:1/1;background:#e9e2d6">
@@ -176,36 +236,36 @@
         <section style="position:relative;overflow:hidden;margin-top:0">
           <img src="assets/store-interior.png" style="width:100%;height:460px;object-fit:cover;display:block">
           <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(40,36,30,.62),rgba(40,36,30,.2))"></div>
-          <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:18px;padding:0 8vw;color:#FCFAF5;max-width:640px">
+          <div class="cc-store-strip" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:18px;padding:0 8vw;color:#FCFAF5;max-width:640px">
             <div style="font-size:12px;letter-spacing:.28em;text-transform:uppercase">126 N. Maple Street</div>
-            <h2 style="font-family:'Cormorant',serif;font-size:48px;font-weight:500;line-height:1.04">A storefront built<br>for slow mornings</h2>
+            <h2 class="cc-big" style="font-family:'Cormorant',serif;font-size:48px;font-weight:500;line-height:1.04">A storefront built<br>for slow mornings</h2>
             <p style="font-size:16px;line-height:1.7;font-weight:300;opacity:.92;max-width:480px">Exposed brick, a striped awning, and racks of pieces we'd dress our own babies in. Come browse in person — or let us bring a little of it to your doorstep.</p>
             <div style="display:flex;gap:14px"><span onClick="{{ goAbout }}" style="cursor:pointer;border:1px solid #FCFAF5;padding:13px 28px;font-size:12px;letter-spacing:.16em;text-transform:uppercase">Our story</span><span onClick="{{ goVisit }}" style="cursor:pointer;background:#FCFAF5;color:#3A352E;padding:13px 28px;font-size:12px;letter-spacing:.16em;text-transform:uppercase">Plan a visit</span></div>
           </div>
         </section>
 
         <!-- registry CTA -->
-        <section style="max-width:1280px;margin:0 auto;padding:80px 28px">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid #ece5d8">
+        <section class="cc-section" style="max-width:1280px;margin:0 auto;padding:80px 28px">
+          <div class="cc-split" style="display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid #ece5d8">
             <div style="padding:56px 52px;display:flex;flex-direction:column;gap:18px;justify-content:center">
               <div style="font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:#7E97A3">Expecting?</div>
               <h2 style="font-family:'Cormorant',serif;font-size:40px;font-weight:500;line-height:1.05">Build a baby registry<br>worth keeping</h2>
               <p style="font-size:15.5px;line-height:1.7;color:#6B6258;font-weight:300;max-width:400px">Add pieces from the shop, share with family, and let us gift-wrap every arrival. Local parents can pick up in store — or we'll ship straight to the nursery.</p>
               <div style="display:flex;gap:14px;margin-top:4px"><span onClick="{{ goRegistry }}" style="cursor:pointer;background:#3A352E;color:#FCFAF5;padding:14px 28px;font-size:12px;letter-spacing:.16em;text-transform:uppercase">Start a registry</span><span onClick="{{ goRegistry }}" style="cursor:pointer;border:1px solid #3A352E;padding:14px 28px;font-size:12px;letter-spacing:.16em;text-transform:uppercase">Find a registry</span></div>
             </div>
-            <div style="position:relative;overflow:hidden;min-height:360px;background:#e9e2d6">
+            <div class="cc-split-tall" style="position:relative;overflow:hidden;min-height:360px;background:#e9e2d6">
               <img src="assets/cat-girl.png" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0">
             </div>
           </div>
         </section>
 
         <!-- instagram / shop the look -->
-        <section style="max-width:1280px;margin:0 auto;padding:8px 28px 24px">
+        <section class="cc-section" style="max-width:1280px;margin:0 auto;padding:8px 28px 24px">
           <div style="text-align:center;margin-bottom:30px">
             <div style="font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:#7E97A3;margin-bottom:10px">@cottonandcradle</div>
             <h2 style="font-family:'Cormorant',serif;font-size:38px;font-weight:500">Shop the look</h2>
           </div>
-          <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px">
+          <div class="cc-grid-6" style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px">
             <div class="cc-prod" style="overflow:hidden;aspect-ratio:1/1;background:#e9e2d6;position:relative;cursor:pointer"><img src="assets/prod-03.png" style="width:100%;height:100%;object-fit:cover"></div>
             <div class="cc-prod" style="overflow:hidden;aspect-ratio:1/1;background:#e9e2d6;position:relative;cursor:pointer"><img src="assets/prod-05.png" style="width:100%;height:100%;object-fit:cover"></div>
             <div class="cc-prod" style="overflow:hidden;aspect-ratio:1/1;background:#e9e2d6;position:relative;cursor:pointer"><img src="assets/cat-girl.png" style="width:100%;height:100%;object-fit:cover"></div>
@@ -218,15 +278,15 @@
     </sc-if>
     <!-- SHOP -->
     <sc-if value="{{ isShop }}" hint-placeholder-val="{{ false }}">
-      <div class="cc-fade" style="max-width:1280px;margin:0 auto;padding:40px 28px 24px">
+      <div class="cc-fade cc-section" style="max-width:1280px;margin:0 auto;padding:40px 28px 24px">
         <div style="text-align:center;margin-bottom:8px">
           <div style="font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:#7E97A3;margin-bottom:10px">The shop</div>
-          <h1 style="font-family:'Cormorant',serif;font-size:48px;font-weight:500">All things little</h1>
+          <h1 class="cc-big" style="font-family:'Cormorant',serif;font-size:48px;font-weight:500">All things little</h1>
           <p style="font-size:14px;color:#9a9082;margin-top:8px;font-weight:300">{{ filteredCount }} pieces · live stock from our register</p>
         </div>
-        <div style="display:grid;grid-template-columns:230px 1fr;gap:36px;margin-top:30px;align-items:start">
+        <div class="cc-shop" style="display:grid;grid-template-columns:230px 1fr;gap:36px;margin-top:30px;align-items:start">
           <!-- filters -->
-          <aside style="display:flex;flex-direction:column;gap:26px;position:sticky;top:120px">
+          <aside class="cc-filters" style="display:flex;flex-direction:column;gap:26px;position:sticky;top:120px">
             <div>
               <div style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#9a9082;margin-bottom:12px;border-bottom:1px solid #ece5d8;padding-bottom:8px">Category</div>
               <div style="display:flex;flex-direction:column;gap:9px">
@@ -262,7 +322,7 @@
             <span onClick="{{ clearFilters }}" class="cc-link" style="cursor:pointer;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#b3a995">Clear all</span>
           </aside>
           <!-- grid -->
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+          <div class="cc-grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
             <sc-for list="{{ filtered }}" as="p" hint-placeholder-count="0">
               <div onClick="{{ p.open }}" class="cc-prod" style="cursor:pointer;display:flex;flex-direction:column;gap:10px">
                 <div style="position:relative;overflow:hidden;aspect-ratio:5/6;background:#e9e2d6">
@@ -288,9 +348,9 @@
 
     <!-- PRODUCT DETAIL -->
     <sc-if value="{{ isProduct }}" hint-placeholder-val="{{ false }}">
-      <div class="cc-fade" style="max-width:1180px;margin:0 auto;padding:28px 28px 24px">
+      <div class="cc-fade cc-section" style="max-width:1180px;margin:0 auto;padding:28px 28px 24px">
         <div style="font-size:12px;color:#9a9082;margin-bottom:22px;letter-spacing:.06em"><span onClick="{{ goShop }}" class="cc-link" style="cursor:pointer">Shop</span> &nbsp;/&nbsp; {{ pv.name }}</div>
-        <div style="display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:start">
+        <div class="cc-pdp" style="display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:start">
           <!-- gallery -->
           <div style="display:flex;flex-direction:column;gap:12px">
             <div style="position:relative;overflow:hidden;aspect-ratio:4/5;background:#e9e2d6">
@@ -306,7 +366,7 @@
             </div>
           </div>
           <!-- info -->
-          <div style="display:flex;flex-direction:column;gap:18px;position:sticky;top:120px">
+          <div class="cc-pdp-info" style="display:flex;flex-direction:column;gap:18px;position:sticky;top:120px">
             <div style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#a89e8c">{{ pv.brand }}</div>
             <h1 style="font-family:'Cormorant',serif;font-size:42px;font-weight:500;line-height:1.05">{{ pv.name }}</h1>
             <div style="font-size:22px;color:#3A352E;font-weight:400">{{ pv.priceLabel }}</div>
@@ -349,12 +409,12 @@
     <!-- ABOUT -->
     <sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
       <div class="cc-fade">
-        <section style="position:relative;overflow:hidden;height:380px">
+        <section class="cc-section" style="position:relative;overflow:hidden;height:380px">
           <img src="assets/rack-wide.png" style="width:100%;height:100%;object-fit:cover;display:block">
           <div style="position:absolute;inset:0;background:rgba(40,36,30,.42)"></div>
           <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#FCFAF5;text-align:center">
             <div style="font-size:12px;letter-spacing:.28em;text-transform:uppercase">Our story</div>
-            <h1 style="font-family:'Cormorant',serif;font-size:56px;font-weight:500">A little shop with a big heart</h1>
+            <h1 class="cc-big" style="font-family:'Cormorant',serif;font-size:56px;font-weight:500">A little shop with a big heart</h1>
           </div>
         </section>
         <section style="max-width:760px;margin:0 auto;padding:64px 28px;text-align:center;display:flex;flex-direction:column;gap:22px">
@@ -362,7 +422,7 @@
           <p style="font-size:16px;line-height:1.85;color:#6B6258;font-weight:300">Cotton + Cradle opened its doors in the heart of historic downtown Murfreesboro with a simple idea: thoughtfully made, heirloom-quality clothing and gifts for babies and little ones — gathered in one warm, welcoming space. From smocked daygowns to that perfect board book, every piece on our racks is chosen with care.</p>
           <p style="font-size:16px;line-height:1.85;color:#6B6258;font-weight:300">Behind the striped awning at 126 N. Maple, you'll find exposed brick, soft light, and shelves we've curated like we'd dress our own. Whether you're expecting, gifting, or just browsing, we'd love to welcome you in.</p>
         </section>
-        <section style="max-width:1100px;margin:0 auto;padding:0 28px 72px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+        <section class="cc-section cc-grid-3" style="max-width:1100px;margin:0 auto;padding:0 28px 72px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
           <img src="assets/cat-newborn.png" style="width:100%;height:340px;object-fit:cover;display:block">
           <img src="assets/storefront-soft.png" style="width:100%;height:340px;object-fit:contain;display:block;background:#F7F3EC">
           <img src="assets/cat-books.png" style="width:100%;height:340px;object-fit:cover;display:block">
@@ -377,12 +437,12 @@
 
     <!-- VISIT -->
     <sc-if value="{{ isVisit }}" hint-placeholder-val="{{ false }}">
-      <div class="cc-fade" style="max-width:1180px;margin:0 auto;padding:48px 28px 64px">
+      <div class="cc-fade cc-section" style="max-width:1180px;margin:0 auto;padding:48px 28px 64px">
         <div style="text-align:center;margin-bottom:40px">
           <div style="font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:#7E97A3;margin-bottom:10px">Find us</div>
-          <h1 style="font-family:'Cormorant',serif;font-size:50px;font-weight:500">Visit the shop</h1>
+          <h1 class="cc-big" style="font-family:'Cormorant',serif;font-size:50px;font-weight:500">Visit the shop</h1>
         </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:stretch">
+        <div class="cc-split" style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:stretch">
           <div style="display:flex;flex-direction:column;gap:26px">
             <img src="assets/storefront-soft.png" style="width:100%;max-height:360px;object-fit:contain;display:block;background:#F7F3EC">
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
@@ -425,7 +485,7 @@
         <section style="background:#F7F3EC;padding:64px 28px">
           <div style="max-width:900px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center;gap:18px">
             <div style="font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:#7E97A3">Baby & gift registry</div>
-            <h1 style="font-family:'Cormorant',serif;font-size:56px;font-weight:500;line-height:1.02">For the little one<br>on the way</h1>
+            <h1 class="cc-big" style="font-family:'Cormorant',serif;font-size:56px;font-weight:500;line-height:1.02">For the little one<br>on the way</h1>
             <p style="font-size:16px;line-height:1.7;color:#6B6258;font-weight:300;max-width:520px">Create a registry of pieces you love, share it with family and friends, and let us handle the gift wrap. Local loved ones can shop in store; everyone else can ship straight to the nursery.</p>
             <div style="display:flex;gap:14px;margin-top:6px">
               <span style="cursor:pointer;background:#3A352E;color:#FCFAF5;padding:15px 30px;font-size:12px;letter-spacing:.16em;text-transform:uppercase">Create a registry</span>
@@ -433,8 +493,8 @@
             </div>
           </div>
         </section>
-        <section style="max-width:1100px;margin:0 auto;padding:64px 28px">
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px">
+        <section class="cc-section" style="max-width:1100px;margin:0 auto;padding:64px 28px">
+          <div class="cc-grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px">
             <div style="text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center">
               <div style="width:54px;height:54px;border-radius:50%;background:#F2EDE3;display:flex;align-items:center;justify-content:center;font-family:'Cormorant',serif;font-size:24px;color:#7E97A3">1</div>
               <div style="font-family:'Cormorant',serif;font-size:22px">Add your favorites</div>
@@ -452,9 +512,9 @@
             </div>
           </div>
         </section>
-        <section style="max-width:1100px;margin:0 auto;padding:0 28px 72px">
+        <section class="cc-section" style="max-width:1100px;margin:0 auto;padding:0 28px 72px">
           <div style="text-align:center;margin-bottom:28px"><h2 style="font-family:'Cormorant',serif;font-size:34px;font-weight:500">Registry favorites</h2></div>
-          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px">
+          <div class="cc-grid-4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px">
             <sc-for list="{{ newArrivals }}" as="p" hint-placeholder-count="0">
               <div onClick="{{ p.open }}" class="cc-prod" style="cursor:pointer;display:flex;flex-direction:column;gap:10px">
                 <div style="overflow:hidden;aspect-ratio:5/6;background:#e9e2d6"><img src="{{ p.url }}" style="width:100%;height:100%;object-fit:cover;display:block"></div>
@@ -469,15 +529,15 @@
 
     <!-- EVENTS -->
     <sc-if value="{{ isEvents }}" hint-placeholder-val="{{ false }}">
-      <div class="cc-fade" style="max-width:920px;margin:0 auto;padding:48px 28px 72px">
+      <div class="cc-fade cc-section" style="max-width:920px;margin:0 auto;padding:48px 28px 72px">
         <div style="text-align:center;margin-bottom:40px">
           <div style="font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:#7E97A3;margin-bottom:10px">In the shop</div>
-          <h1 style="font-family:'Cormorant',serif;font-size:50px;font-weight:500">Events & classes</h1>
+          <h1 class="cc-big" style="font-family:'Cormorant',serif;font-size:50px;font-weight:500">Events & classes</h1>
           <p style="font-size:15px;color:#6B6258;font-weight:300;margin-top:10px">Story times, trunk shows, and little gatherings at 126 N. Maple.</p>
         </div>
         <div style="display:flex;flex-direction:column;gap:14px">
           <sc-for list="{{ events }}" as="e" hint-placeholder-count="4">
-            <div style="display:grid;grid-template-columns:96px 1fr auto;gap:24px;align-items:center;background:#FCFAF5;border:1px solid #ece5d8;padding:22px 26px">
+            <div class="cc-events-row" style="display:grid;grid-template-columns:96px 1fr auto;gap:24px;align-items:center;background:#FCFAF5;border:1px solid #ece5d8;padding:22px 26px">
               <div style="text-align:center;border-right:1px solid #ece5d8;padding-right:8px">
                 <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9a9082">{{ e.month }}</div>
                 <div style="font-family:'Cormorant',serif;font-size:34px;line-height:1;color:#3A352E">{{ e.day }}</div>
@@ -486,7 +546,7 @@
                 <div style="font-family:'Cormorant',serif;font-size:22px">{{ e.title }}</div>
                 <div style="font-size:13.5px;color:#6B6258;font-weight:300">{{ e.time }} · {{ e.desc }}</div>
               </div>
-              <span style="cursor:pointer;border:1px solid #3A352E;padding:11px 20px;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap">{{ e.cta }}</span>
+              <span class="cc-events-cta" style="cursor:pointer;border:1px solid #3A352E;padding:11px 20px;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap">{{ e.cta }}</span>
             </div>
           </sc-for>
         </div>
@@ -497,7 +557,7 @@
   <!-- FOOTER -->
   <footer style="background:#3A352E;color:#E6DFD2;margin-top:72px">
     <div class="stripe" style="height:10px"></div>
-    <div style="max-width:1280px;margin:0 auto;padding:56px 28px 32px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:40px">
+    <div class="cc-footer" style="max-width:1280px;margin:0 auto;padding:56px 28px 32px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:40px">
       <div style="display:flex;flex-direction:column;gap:14px">
         <div style="font-family:'Cormorant',serif;font-size:26px;font-weight:500">cotton <span style="color:#A9BBC4">+</span> cradle</div>
         <p style="font-size:14px;line-height:1.7;color:#b7ae9e;font-weight:300;max-width:280px">A curated baby & children's boutique in historic downtown Murfreesboro. Heirloom quality, gathered with love.</p>
@@ -578,7 +638,7 @@
 class Component extends DCLogic {
   state = { page:'home', hero:0, cart:[], cartOpen:false,
     fCat:'all', fSize:'all', fColor:'all', fBrand:'all',
-    activeId:null, pImg:0, pSize:null, pColor:null };
+    activeId:null, pImg:0, pSize:null, pColor:null, navOpen:false };
 
   products(){
     return [
@@ -599,7 +659,7 @@ class Component extends DCLogic {
   imgUrl(seed){ return seed; }
   money(n){ return '$'+n.toFixed(0); }
 
-  go(p){ this.setState({page:p, cartOpen:false}); if(typeof window!=='undefined') window.scrollTo({top:0}); }
+  go(p){ this.setState({page:p, cartOpen:false, navOpen:false}); if(typeof window!=='undefined') window.scrollTo({top:0}); }
   open(id){ const pr=this.products().find(x=>x.id===id); this.setState({page:'product', activeId:id, pImg:0, pSize:pr?pr.sizes[0]:null, pColor:pr?0:null, cartOpen:false}); if(typeof window!=='undefined') window.scrollTo({top:0}); }
 
   add(pr, size, color){
@@ -676,6 +736,10 @@ class Component extends DCLogic {
       isAbout:S.page==='about', isVisit:S.page==='visit', isRegistry:S.page==='registry', isEvents:S.page==='events',
       goHome:()=>this.go('home'), goShop:()=>this.go('shop'), goAbout:()=>this.go('about'),
       goVisit:()=>this.go('visit'), goRegistry:()=>this.go('registry'), goEvents:()=>this.go('events'),
+      openNav:()=>this.setState({navOpen:true}), closeNav:()=>this.setState({navOpen:false}), navOpen:S.navOpen,
+      navShop:()=>this.go('shop'), navRegistry:()=>this.go('registry'), navEvents:()=>this.go('events'),
+      navAbout:()=>this.go('about'), navVisit:()=>this.go('visit'),
+      navCart:()=>this.setState({navOpen:false, cartOpen:true}),
       // hero
       isHero0:S.hero===0, isHero1:S.hero===1, isHero2:S.hero===2,
       setHero0:()=>this.setState({hero:0}), setHero1:()=>this.setState({hero:1}), setHero2:()=>this.setState({hero:2}),
