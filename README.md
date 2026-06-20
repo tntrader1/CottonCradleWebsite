@@ -12,13 +12,18 @@ before wiring up live systems.
 ## What's inside
 
 ```
-index.html      ← the entire site, self-contained (open it directly in a browser)
-assets/         ← store + product photography used by the shop
+index.html      ← the site
+support.js       ← runtime that renders the page (required, keep next to index.html)
+assets/          ← store + product photography
 ```
 
-`index.html` already has the site code, fonts, and most imagery embedded. The
-`assets/` folder holds the product/lifestyle photos that the shop loads on demand,
-so **keep `index.html` and `assets/` together**.
+Keep all three together at the repo root — `index.html` loads `support.js` and the
+`assets/` images by relative path.
+
+> Note: deploy these files **as-is**. Don't run them through an HTML "inliner"/bundler —
+> the product images load at runtime, and a bundler will log `[bundle] error` for them.
+> A normal static host (Vercel, GitHub Pages, Netlify) serves the files directly and
+> everything resolves correctly.
 
 ---
 
